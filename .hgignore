@@ -1,0 +1,9 @@
+syntax: glob
+bin
+obj
+.objs
+minecraft-server-backupifier
+*.depend
+Thumbs.db
+*.cfg
+backups

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Minecraft Server Backupifier" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Release">
+				<Option platforms="Windows;" />
+				<Option output="bin\Release\minecraft-server-backup.exe" prefix_auto="1" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output="obj\Release\" />
+				<Option type="5" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-fexpensive-optimizations" />
+					<Add option="-O3" />
+					<Add option="-w" />
+					<Add directory="..\..\MinGW\include" />
+					<Add directory="..\..\Boost" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-lmingw32" />
+					<Add option="-mwindows" />
+					<Add library="..\..\Boost\stage\lib\libboost_system-mgw45-mt-1_46_1.a" />
+					<Add library="..\..\Boost\stage\lib\libboost_filesystem-mgw45-mt-1_46_1.a" />
+					<Add library="..\..\Boost\stage\lib\libboost_iostreams-mgw45-mt-1_46_1.a" />
+					<Add library="..\..\Boost\stage\lib\libboost_bzip2-mgw45-mt-1_46_1.a" />
+					<Add directory="..\..\Boost\stage\lib" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="main.cpp" />
+		<Unit filename="main.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

@@ -181,6 +181,8 @@ string determine_world_name(){
 
 void create_top_level_directories(string world_name){
     boost::filesystem3::create_directory("backups");
+
+    boost::filesystem3::create_directories("backups/"+world_name);
 }
 
 bool create_backup(string world_name){

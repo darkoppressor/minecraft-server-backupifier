@@ -180,9 +180,9 @@ string determine_world_name(){
 }
 
 void create_top_level_directories(string world_name){
-    boost::filesystem3::create_directory("backups");
+    boost::filesystem::create_directory("backups");
 
-    boost::filesystem3::create_directories("backups/"+world_name);
+    boost::filesystem::create_directories("backups/"+world_name);
 }
 
 bool create_backup(string world_name){
@@ -200,13 +200,13 @@ bool create_backup(string world_name){
     backup_directory+="/";
     backup_directory+=buff;
 
-    if(boost::filesystem3::exists(backup_directory)){
+    if(boost::filesystem::exists(backup_directory)){
         write_to_log("Backup with this exact name already exists!\nAborting backup...\n");
 
         return false;
     }
 
-    if(!boost::filesystem3::exists(world_name)){
+    if(!boost::filesystem::exists(world_name)){
         write_to_log("The world specified in server.properties does not exist!\nAborting backup...\n");
 
         return false;
@@ -214,14 +214,14 @@ bool create_backup(string world_name){
 
     string world_backup="backups/";
     world_backup+=world_name;
-    boost::filesystem3::create_directory(world_backup);
-    boost::filesystem3::create_directory(backup_directory);
+    boost::filesystem::create_directory(world_backup);
+    boost::filesystem::create_directory(backup_directory);
 
-    for(boost::filesystem3::recursive_directory_iterator end_of_files,dir(world_name);dir!=end_of_files;++dir){
-        boost::filesystem3::path temp_path(*dir);
+    for(boost::filesystem::recursive_directory_iterator end_of_files,dir(world_name);dir!=end_of_files;++dir){
+        boost::filesystem::path temp_path(*dir);
         string destination_file=temp_path.string();
         boost::algorithm::replace_first(destination_file,world_name,backup_directory);
-        boost::filesystem3::copy(*dir,destination_file);
+        boost::filesystem::copy(*dir,destination_file);
     }
 
     write_to_log("Success! Backup created.");
@@ -241,8 +241,8 @@ void check_for_oldest_backup(string world_name){
     int folder_number=0;
 
     //Look through all of the directories in the directory.
-    for(boost::filesystem3::directory_iterator it(world_directory);it!=boost::filesystem3::directory_iterator();it++){
-        if(boost::filesystem3::is_directory(it->path())){
+    for(boost::filesystem::directory_iterator it(world_directory);it!=boost::filesystem::directory_iterator();it++){
+        if(boost::filesystem::is_directory(it->path())){
             //Create a new date/time entry.
             dates.push_back(date_and_time());
 
@@ -406,10 +406,10 @@ void delete_oldest_backup(int target_folder_number,string world_directory){
     int folder_number=0;
 
     //Look through all of the directories in the directory.
-    for(boost::filesystem3::directory_iterator it(world_directory);it!=boost::filesystem3::directory_iterator();it++){
-        if(boost::filesystem3::is_directory(it->path())){
+    for(boost::filesystem::directory_iterator it(world_directory);it!=boost::filesystem::directory_iterator();it++){
+        if(boost::filesystem::is_directory(it->path())){
             if(folder_number==target_folder_number){
-                boost::filesystem3::remove_all(it->path());
+                boost::filesystem::remove_all(it->path());
             }
 
             folder_number++;
@@ -441,8 +441,8 @@ int main(int argc, char* args[]){
         int folder_number=0;
 
         //Look through all of the directories in the directory.
-        for(boost::filesystem3::directory_iterator it(world_directory);it!=boost::filesystem3::directory_iterator();it++){
-            if(boost::filesystem3::is_directory(it->path())){
+        for(boost::filesystem::directory_iterator it(world_directory);it!=boost::filesystem::directory_iterator();it++){
+            if(boost::filesystem::is_directory(it->path())){
                 folder_number++;
             }
         }

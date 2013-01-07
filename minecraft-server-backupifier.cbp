@@ -8,28 +8,27 @@
 		<Build>
 			<Target title="Release">
 				<Option platforms="Windows;" />
-				<Option output="bin\Release\minecraft-server-backup.exe" prefix_auto="1" extension_auto="0" />
-				<Option working_dir="" />
-				<Option object_output="obj\Release\" />
-				<Option type="5" />
+				<Option output="bin/Release/minecraft-server-backup.exe" prefix_auto="1" extension_auto="0" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-fexpensive-optimizations" />
 					<Add option="-O2" />
 					<Add option="-w" />
-					<Add directory="..\..\MinGW\include" />
-					<Add directory="..\..\Boost" />
+					<Add directory="../../MinGW/include" />
+					<Add directory="../../Boost" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
 					<Add option="-lmingw32" />
 					<Add option="-mwindows" />
 					<Add option="-Wl,--stack=67108864" />
-					<Add library="..\..\Boost\stage\lib\libboost_system-mgw45-mt-1_49.a" />
-					<Add library="..\..\Boost\stage\lib\libboost_filesystem-mgw45-mt-1_49.a" />
-					<Add library="..\..\Boost\stage\lib\libboost_iostreams-mgw45-mt-1_49.a" />
-					<Add library="..\..\Boost\stage\lib\libboost_bzip2-mgw45-mt-1_49.a" />
-					<Add directory="..\..\Boost\stage\lib" />
+					<Add library="..\..\Boost\stage\lib\libboost_system-mgw47-mt-1_51.a" />
+					<Add library="..\..\Boost\stage\lib\libboost_filesystem-mgw47-mt-1_51.a" />
+					<Add library="..\..\Boost\stage\lib\libboost_iostreams-mgw47-mt-1_51.a" />
+					<Add library="..\..\Boost\stage\lib\libboost_bzip2-mgw47-mt-1_51.a" />
+					<Add directory="../../Boost/stage/lib" />
 				</Linker>
 			</Target>
 		</Build>

@@ -5,30 +5,103 @@
 		<Option title="Minecraft Server Backupifier" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
+		<Option extended_obj_names="1" />
 		<Build>
-			<Target title="Release">
+			<Target title="Release-Windows-x86">
 				<Option platforms="Windows;" />
-				<Option output="bin/Release/minecraft-server-backup.exe" prefix_auto="1" extension_auto="0" />
-				<Option object_output="obj/Release/" />
-				<Option type="0" />
+				<Option output="Minecraft-Server-Backupifier-Windows-x86.exe" prefix_auto="1" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output=".objs/windows-x86" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+				<Compiler>
+					<Add option="-fexpensive-optimizations" />
+					<Add option="-O2" />
+					<Add option="-w" />
+					<Add directory="C:/Development/c++/MinGW/include" />
+					<Add directory="C:/Development/c++/boost" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-lmingw32" />
+					<Add option="-Wl,--stack=67108864" />
+					<Add library="C:\Development\c++\boost\stage\lib\libboost_system-mt.a" />
+					<Add library="C:\Development\c++\boost\stage\lib\libboost_filesystem-mt.a" />
+				</Linker>
+			</Target>
+			<Target title="Release-Linux-x86_64">
+				<Option platforms="Unix;" />
+				<Option output="Minecraft-Server-Backupifier-Linux-x86_64" prefix_auto="1" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output=".objs/linux-x86_64" />
+				<Option type="5" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-fexpensive-optimizations" />
 					<Add option="-O2" />
 					<Add option="-w" />
-					<Add directory="../../MinGW/include" />
-					<Add directory="../../Boost" />
+					<Add directory="/usr/include/" />
+					<Add directory="/usr/include/x86_64-linux-gnu/" />
+					<Add directory="/home/kevin/.codeblocks/boost/" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add option="-lmingw32" />
-					<Add option="-mwindows" />
-					<Add option="-Wl,--stack=67108864" />
-					<Add library="..\..\Boost\stage\lib\libboost_system-mgw47-mt-1_51.a" />
-					<Add library="..\..\Boost\stage\lib\libboost_filesystem-mgw47-mt-1_51.a" />
-					<Add library="..\..\Boost\stage\lib\libboost_iostreams-mgw47-mt-1_51.a" />
-					<Add library="..\..\Boost\stage\lib\libboost_bzip2-mgw47-mt-1_51.a" />
-					<Add directory="../../Boost/stage/lib" />
+					<Add library="\home\kevin\.codeblocks\boost\stage\lib\libboost_system.a" />
+					<Add library="\home\kevin\.codeblocks\boost\stage\lib\libboost_filesystem.a" />
+				</Linker>
+			</Target>
+			<Target title="Release-Linux-x86">
+				<Option platforms="Unix;" />
+				<Option output="Minecraft-Server-Backupifier-Linux-x86" prefix_auto="1" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output=".objs/linux-x86" />
+				<Option type="5" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-fexpensive-optimizations" />
+					<Add option="-O2" />
+					<Add option="-w" />
+					<Add directory="/usr/include/" />
+					<Add directory="/home/kevin/.codeblocks/boost/" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="\home\kevin\.codeblocks\boost\stage\lib\libboost_system.a" />
+					<Add library="\home\kevin\.codeblocks\boost\stage\lib\libboost_filesystem.a" />
+				</Linker>
+			</Target>
+			<Target title="Release-OSX-x86_64">
+				<Option platforms="Mac;" />
+				<Option output="Minecraft-Server-Backupifier-OSX-x86_64" prefix_auto="1" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output=".objs/osx-x86_64" />
+				<Option type="5" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-fexpensive-optimizations" />
+					<Add option="-O2" />
+					<Add option="-w" />
+					<Add directory="/usr/include/" />
+					<Add directory="/home/kevin/.codeblocks/boost/" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-arch x86_64" />
+					<Add option="-mmacosx-version-min=10.6" />
+					<Add option="-framework CoreFoundation" />
+					<Add option="-framework ApplicationServices" />
+					<Add option="-framework IOKit" />
+					<Add option="-framework AppKit" />
+					<Add option="-framework Carbon" />
+					<Add option="-framework ForceFeedback" />
+					<Add option="-framework CoreAudio" />
+					<Add option="-framework AudioUnit" />
+					<Add option="-framework AudioToolbox" />
+					<Add option="-framework OpenGL" />
+					<Add library="\home\kevin\.codeblocks\boost\stage\lib\libboost_filesystem.a" />
+					<Add library="\home\kevin\.codeblocks\boost\stage\lib\libboost_system.a" />
+					<Add library="\usr\lib\libiconv.2.dylib" />
 				</Linker>
 			</Target>
 		</Build>

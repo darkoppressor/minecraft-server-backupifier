@@ -1,4 +1,4 @@
-/* Copyright (c) 2011 Kevin Wells */
+/* Copyright (c) 2011-2014 Kevin Wells */
 /* Minecraft Server Backupifier may be freely redistributed.  See license for details. */
 
 #ifndef main_h

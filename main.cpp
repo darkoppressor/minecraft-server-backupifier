@@ -1,4 +1,4 @@
-/* Copyright (c) 2011 Kevin Wells */
+/* Copyright (c) 2011-2014 Kevin Wells */
 /* Minecraft Server Backupifier may be freely redistributed.  See license for details. */
 
 #include "main.h"
@@ -7,9 +7,9 @@
 
 #include <boost/filesystem.hpp>
 #include <boost/algorithm/string.hpp>
-#include <boost/iostreams/filtering_streambuf.hpp>
+/**#include <boost/iostreams/filtering_streambuf.hpp>
 #include <boost/iostreams/copy.hpp>
-#include <boost/iostreams/filter/bzip2.hpp>
+#include <boost/iostreams/filter/bzip2.hpp>*/
 
 using namespace std;
 
@@ -171,7 +171,7 @@ string determine_world_name(){
         load.clear();
 
         write_to_log("Failed to load server.properties!");
-        write_to_log("Is minecraft-server-backup.exe in the Minecraft server's directory?");
+        write_to_log("Is the Minecraft Server Backupifier in the Minecraft server's directory?");
         write_to_log("Has the server been properly setup?");
         write_to_log("Aborting backup...\n");
     }

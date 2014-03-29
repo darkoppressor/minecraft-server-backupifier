@@ -1,9 +1,20 @@
+syntax: regexp
+
+^.objs/
+^docs/
+^backups/
+
+^Minecraft-Server-Backupifier-Linux-x86_64$
+^Minecraft-Server-Backupifier-Linux-x86$
+^Minecraft-Server-Backupifier-OSX-x86_64$
+
+^backup_log.txt$
+^stdout.txt$
+
 syntax: glob
-bin
-obj
-.objs
-minecraft-server-backupifier
+
+*.exe
+*.cscope_file_list
 *.depend
-Thumbs.db
 *.cfg
-backups
+*.save

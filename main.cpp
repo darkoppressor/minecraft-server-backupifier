@@ -1,15 +1,9 @@
-/* Copyright (c) 2011-2014 Kevin Wells */
-/* Minecraft Server Backupifier may be freely redistributed.  See license for details. */
-
 #include "main.h"
 
 #include <fstream>
 
 #include <boost/filesystem.hpp>
 #include <boost/algorithm/string.hpp>
-/**#include <boost/iostreams/filtering_streambuf.hpp>
-#include <boost/iostreams/copy.hpp>
-#include <boost/iostreams/filter/bzip2.hpp>*/
 
 using namespace std;
 
@@ -116,7 +110,13 @@ vector<date_and_time> quick_sort(vector<date_and_time> dates,short sort_by){
 }
 
 void write_to_log(string message){
-    ofstream save_log("backup_log.txt",ofstream::app);
+    string save_str="log-minecraft-server-backupifier";
+
+    #ifdef GAME_OS_WINDOWS
+        save_str+=".txt";
+    #endif
+
+    ofstream save_log(save_str,ofstream::app);
 
     if(save_log!=NULL){
         time_t now;
@@ -126,7 +126,7 @@ void write_to_log(string message){
         tm_now=localtime(&now);
         strftime(buff,sizeof buff,"[%Y-%m-%d %H:%M:%S] ",tm_now);
 
-        save_log<<buff<<message<<"\n";
+        save_log<<buff<<"["<<directory<<"] "<<message<<"\n";
 
         save_log.close();
         save_log.clear();
@@ -136,8 +136,8 @@ void write_to_log(string message){
 string determine_world_name(){
     string world_name="";
 
-    ifstream load;
-    load.open("server.properties",ifstream::in);
+    string load_str=directory+"server.properties";
+    ifstream load(load_str.c_str(),ifstream::in);
 
     if(load!=NULL){
         write_to_log("server.properties successfully loaded!");
@@ -172,6 +172,7 @@ string determine_world_name(){
 
         write_to_log("Failed to load server.properties!");
         write_to_log("Is the Minecraft Server Backupifier in the Minecraft server's directory?");
+        write_to_log("Or, did you pass the Minecraft server's correct directory to the Backupifier?");
         write_to_log("Has the server been properly setup?");
         write_to_log("Aborting backup...\n");
     }
@@ -180,9 +181,9 @@ string determine_world_name(){
 }
 
 void create_top_level_directories(string world_name){
-    boost::filesystem::create_directory("backups");
+    boost::filesystem::create_directory(directory+"backups");
 
-    boost::filesystem::create_directories("backups/"+world_name);
+    boost::filesystem::create_directories(directory+"backups/"+world_name);
 }
 
 bool create_backup(string world_name){
@@ -195,7 +196,7 @@ bool create_backup(string world_name){
     tm_now=localtime(&now);
     strftime(buff,sizeof buff,"%Y-%m-%d_%H.%M.%S",tm_now);
 
-    string backup_directory="backups/";
+    string backup_directory=directory+"backups/";
     backup_directory+=world_name;
     backup_directory+="/";
     backup_directory+=buff;
@@ -212,7 +213,7 @@ bool create_backup(string world_name){
         return false;
     }
 
-    string world_backup="backups/";
+    string world_backup=directory+"backups/";
     world_backup+=world_name;
     boost::filesystem::create_directory(world_backup);
     boost::filesystem::create_directory(backup_directory);
@@ -233,7 +234,7 @@ void check_for_oldest_backup(string world_name){
     write_to_log("Number of backups exceeds the limit.");
     write_to_log("Deleting oldest backup...");
 
-    string world_directory="backups/";
+    string world_directory=directory+"backups/";
     world_directory+=world_name;
 
     vector<date_and_time> dates;
@@ -419,7 +420,32 @@ void delete_oldest_backup(int target_folder_number,string world_directory){
     write_to_log("Done!\n");
 }
 
-int main(int argc, char* args[]){
+int main(int argc,char* args[]){
+    directory="./";
+
+    //Can this even happen?
+    if(argc<1){
+        cout<<"Minecraft Server Backupifier error: Did not receive the program name";
+
+        return 1;
+    }
+
+    if(argc>=2){
+        directory=args[1];
+    }
+
+    boost::algorithm::replace_all(directory,"\\","/");
+
+    if(directory[directory.size()-1]!='/'){
+        directory+="/";
+    }
+
+    if(!boost::filesystem::exists(directory)){
+        cout<<"Minecraft Server Backupifier error: The passed directory does not exist";
+
+        return 1;
+    }
+
     write_to_log("Beginning Minecraft server backup...");
 
     string world_name=determine_world_name();
@@ -435,7 +461,7 @@ int main(int argc, char* args[]){
     }
 
     if(create_backup(world_name)){
-        string world_directory="backups/";
+        string world_directory=directory+"backups/";
         world_directory+=world_name;
 
         int folder_number=0;

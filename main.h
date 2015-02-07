@@ -1,6 +1,3 @@
-/* Copyright (c) 2011-2014 Kevin Wells */
-/* Minecraft Server Backupifier may be freely redistributed.  See license for details. */
-
 #ifndef main_h
 #define main_h
 
@@ -26,6 +23,8 @@ struct date_and_time{
     unsigned int data[FOLDER_NUMBER+1];
 };
 
+std::string directory;
+
 bool load_config();
 bool save_config();
 
@@ -43,6 +42,6 @@ void check_for_oldest_backup(std::string world_name);
 
 void delete_oldest_backup(int target_folder_number,std::string world_directory);
 
-int main(int argc, char* args[]);
+int main(int argc,char* args[]);
 
 #endif

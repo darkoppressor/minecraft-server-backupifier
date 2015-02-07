@@ -1,20 +1,17 @@
 syntax: regexp
 
 ^.objs/
-^docs/
 ^backups/
 
-^Minecraft-Server-Backupifier-Linux-x86_64$
-^Minecraft-Server-Backupifier-Linux-x86$
-^Minecraft-Server-Backupifier-OSX-x86_64$
+^.*Linux-x86_64$
+^.*Linux-x86$
+^.*OSX-x86_64$
 
-^backup_log.txt$
-^stdout.txt$
+^log-minecraft-server-backupifier$
+^log-minecraft-server-backupifier.txt$
 
 syntax: glob
 
 *.exe
-*.cscope_file_list
+*.dll
 *.depend
-*.cfg
-*.save

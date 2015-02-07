@@ -1,0 +1,6 @@
+To make this compatible with the Cheesy Build System Version 2,
+I've had to add android/AndroidManifest.xml so the system can
+detect the program's current version.
+
+If I want to update the version, I need to update it there,
+and in *.app/Contents/Info.plist

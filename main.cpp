@@ -207,7 +207,7 @@ bool create_backup(string world_name){
         return false;
     }
 
-    if(!boost::filesystem::exists(world_name)){
+    if(!boost::filesystem::exists(directory+world_name)){
         write_to_log("The world specified in server.properties does not exist!\nAborting backup...\n");
 
         return false;
@@ -218,10 +218,10 @@ bool create_backup(string world_name){
     boost::filesystem::create_directory(world_backup);
     boost::filesystem::create_directory(backup_directory);
 
-    for(boost::filesystem::recursive_directory_iterator end_of_files,dir(world_name);dir!=end_of_files;++dir){
+    for(boost::filesystem::recursive_directory_iterator end_of_files,dir(directory+world_name);dir!=end_of_files;++dir){
         boost::filesystem::path temp_path(*dir);
         string destination_file=temp_path.string();
-        boost::algorithm::replace_first(destination_file,world_name,backup_directory);
+        boost::algorithm::replace_first(destination_file,directory+world_name,backup_directory);
         boost::filesystem::copy(*dir,destination_file);
     }
 

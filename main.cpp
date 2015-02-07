@@ -14,7 +14,7 @@ unsigned int config_backups_per_world=7;
 bool save_config(){
     ofstream save("minecraft-server-backup.cfg");
 
-    if(save!=NULL){
+    if(save.is_open()){
         save<<"//The number of backups that will be saved for any given world.\n";
         save<<"//If the number of backups exceeds this limit, the oldest backup will be deleted.\n";
         save<<"//A value of 0 means no limit.\n";
@@ -34,7 +34,7 @@ bool save_config(){
 bool load_config(){
     ifstream load("minecraft-server-backup.cfg");
 
-    if(load!=NULL){
+    if(load.is_open()){
         write_to_log("Loading minecraft-server-backup.cfg...");
 
         //As long as we haven't reached the end of the file.
@@ -118,7 +118,7 @@ void write_to_log(string message){
 
     ofstream save_log(save_str,ofstream::app);
 
-    if(save_log!=NULL){
+    if(save_log.is_open()){
         time_t now;
         struct tm *tm_now;
         char buff[BUFSIZ];
@@ -139,7 +139,7 @@ string determine_world_name(){
     string load_str=directory+"server.properties";
     ifstream load(load_str.c_str(),ifstream::in);
 
-    if(load!=NULL){
+    if(load.is_open()){
         write_to_log("server.properties successfully loaded!");
 
         //As long as we haven't reached the end of the file.
